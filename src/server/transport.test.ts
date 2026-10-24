@@ -253,17 +253,11 @@ test('setting only one TLS env var fails at startup', async () => {
   try {
     process.env.MCP_TLS_CERT_FILE = certFile;
     delete process.env.MCP_TLS_KEY_FILE;
-    assert.throws(
-      () => connectHttpTransport({ port, authToken: INBOUND_TOKEN }),
-      /both be set/
-    );
+    assert.throws(() => connectHttpTransport({ port, authToken: INBOUND_TOKEN }), /both be set/);
 
     delete process.env.MCP_TLS_CERT_FILE;
     process.env.MCP_TLS_KEY_FILE = keyFile;
-    assert.throws(
-      () => connectHttpTransport({ port, authToken: INBOUND_TOKEN }),
-      /both be set/
-    );
+    assert.throws(() => connectHttpTransport({ port, authToken: INBOUND_TOKEN }), /both be set/);
   } finally {
     restoreEnv('MCP_TLS_CERT_FILE', prevCert);
     restoreEnv('MCP_TLS_KEY_FILE', prevKey);

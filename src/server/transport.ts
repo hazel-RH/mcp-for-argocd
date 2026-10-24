@@ -65,9 +65,7 @@ const tlsListenOptions = (): https.ServerOptions | null => {
 // server.address() still null.
 const listen = (app: express.Express, bindAddress: string, port: number, label: string) => {
   const tlsOptions = tlsListenOptions();
-  const server = tlsOptions
-    ? https.createServer(tlsOptions, app)
-    : app.listen(port, bindAddress);
+  const server = tlsOptions ? https.createServer(tlsOptions, app) : app.listen(port, bindAddress);
   if (tlsOptions) {
     server.listen(port, bindAddress);
   }
